@@ -31,7 +31,15 @@ const WINNER_COMBINATIONS = [
 function TresEnRaya() {
   const [turn, setTurn] = useState(TURNS.X)
   const [board, setBoard] = useState(Array(9).fill(null))
-  const [ winner, setWinner ] = useState(null)
+  const [winner, setWinner] = useState(null)
+  const [winningCombination, setWinningCombination] = useState([])
+
+  const resetGame = () => {
+    setTurn(TURNS.X)
+    setBoard(Array(9).fill(null))
+    setWinner(null)
+    setWinningCombination([])
+  }
 
   const checkWinner = (boardToCheck) => {
     for (const combo of WINNER_COMBINATIONS) {
@@ -41,6 +49,7 @@ function TresEnRaya() {
         boardToCheck[a] === boardToCheck[b] &&
         boardToCheck[a] === boardToCheck[c]
       ) {
+        setWinningCombination(combo)
         return boardToCheck[a]
       }
     }
@@ -48,16 +57,16 @@ function TresEnRaya() {
   }
 
   const updateBoard = (indice) => {
-    if(board[indice] !== null || winner) return
+    if (board[indice] !== null || winner) return
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     const newBoard = [...board]
     newBoard[indice] = turn  
     setBoard(newBoard)
-    checkWinner(newBoard)
     const newWinner = checkWinner(newBoard)
-    if(newWinner) {
+    if (newWinner) {
       setWinner(newWinner)
+
     }
   }
 
@@ -71,7 +80,7 @@ function TresEnRaya() {
               key={index}
               index={index}
               updateBoard={updateBoard}
-              isActive={winner && (board[index] === winner)}
+              isActive={winningCombination.includes(index)}
             >
               {board[index]}
             </Square>
@@ -79,13 +88,22 @@ function TresEnRaya() {
         }
       </section>
       <section className='turno'>
-        <Square isActive={turn === TURNS.X}>
+        <Square isActive={turn === TURNS.X && winner === null}>
           {TURNS.X}
         </Square>
-        <Square isActive={turn === TURNS.O}>
+        <Square isActive={turn === TURNS.O && winner === null}>
           {TURNS.O}
         </Square>
       </section>
+      {
+        winner !== null && (
+          <footer className='winner'>
+            <button onClick={resetGame}>
+              Empezar de nuevo
+            </button>
+          </footer>
+        )
+      }
     </main>
   )
 }
