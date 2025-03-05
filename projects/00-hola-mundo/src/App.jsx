@@ -1,11 +1,18 @@
 import './App.css'
 import TwitterFollowCard from './TwitterFollowCard'
+
 function App() {
+  const format = (userName) => <span>@${userName}</span>
+
   return (
     <main className='tw'>
 
-      <TwitterFollowCard userName='midudev' name='Miguel Angel Blanco' isFollowing={false}/> 
-      <TwitterFollowCard userName='pheralb' name='Pablo Hernandez' isFollowing={false}/> 
+      <TwitterFollowCard formatUserName={format} userName='midudev' initialIsFollowing>
+      Miguel Angel Blanco
+        </TwitterFollowCard>
+      <TwitterFollowCard formatUserName={format} userName='pheralb'>
+      Pablo Hernandez
+        </TwitterFollowCard>
 
     </main>
   )
