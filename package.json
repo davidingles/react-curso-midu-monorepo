@@ -8,5 +8,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "standard": "17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "rules": {
+      "no-multiple-empty-lines": ["error", { "max": 2 }]
+    }
+  }
 }
