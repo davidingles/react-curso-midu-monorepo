@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './TresEnRaya.css'
+import confetti from 'canvas-confetti'
 
 const TURNS = {
   X: 'X',
@@ -54,6 +55,7 @@ function TresEnRaya() {
     setBoard(newBoard)
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
+      confetti()
       setWinner(newWinner)
     }
   }
