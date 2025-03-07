@@ -87,7 +87,7 @@ const [ board, setBoard ] = useState(Array(9).fill(null))
           setCellWin([])
           setEmpate(false)
         }}>
-          {empate ? 'Empate' : winner ? `Ganador: ${winner}` : 'Reiniciar'}
+          {empate ? 'Empate (reiniciar)' : winner ? `Ganador: ${winner} (reiniciar)` : 'Reiniciar'}
         </button>
       </main>
     </>
